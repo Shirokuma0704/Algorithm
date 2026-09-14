@@ -20,7 +20,7 @@ Week4 과제랑 같은 근육이라, 한쪽을 풀면 다른 쪽이 같이 쉬�
 
 | 번호 | 문제 | 과제에서 이어지는 것 | py | c |
 | --- | --- | --- | --- | --- |
-| 0206 | Reverse Linked List | Linked_List Q7 RecursiveReverse | 09-14 | |
+| 0206 | Reverse Linked List | Linked_List Q7 RecursiveReverse | 09-14 | 09-14 |
 | 0020 | Valid Parentheses | Stack_and_Queue Q7 balanced | | |
 | 0232 | Implement Queue using Stacks | Stack_and_Queue Q4 reverseQueue | | |
 | 0225 | Implement Stack using Queues | Q4를 반대 방향으로 | | |

@@ -42,9 +42,20 @@ typedef struct ListNode {
  */
 ListNode *reverseList(ListNode *head)
 {
-    /* 여기부터 */
+    if (head == NULL)
+        return NULL;
+    ListNode *next, *prev;
+    prev = NULL;
 
-    return NULL;   /* <- 다 짜면 이 줄은 없어져요 */
+    while (head != NULL)
+    {
+        next = head->next;
+        head->next = prev;
+        prev = head;
+        head = next;
+    }
+
+    return prev;   /* <- 다 짜면 이 줄은 없어져요 */
 }
 
 
@@ -118,8 +129,8 @@ static Case CASES[] = {
     { {1, 2, 3, 4, 5},  5,   {5, 4, 3, 2, 1},  5 },
     { {1, 2},           2,   {2, 1},           2 },
     { {0},              0,   {0},              0 },   /* 빈 리스트예요 */
-    /* { {          },      ,   {           },      }, */
-    /* { {          },      ,   {           },      }, */
+    { {1}, 1,   {1},1},
+    { {-5, 1, -5},3 ,   { -5,1,-5  }, 3 }
 };
 
 int main(void)
