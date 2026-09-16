@@ -21,7 +21,8 @@ Week4 과제랑 같은 근육이라, 한쪽을 풀면 다른 쪽이 같이 쉬�
 | 번호 | 문제 | 과제에서 이어지는 것 | py | c |
 | --- | --- | --- | --- | --- |
 | 0206 | Reverse Linked List | Linked_List Q7 RecursiveReverse | 09-14 | 09-14 |
-| 0020 | Valid Parentheses | Stack_and_Queue Q7 balanced | | |
+| 0100 | Same Tree | Binary_Tree Q1 재귀 순회 | | 09-15 |
+| 0020 | Valid Parentheses | Stack_and_Queue Q7 balanced | 09-16 | |
 | 0232 | Implement Queue using Stacks | Stack_and_Queue Q4 reverseQueue | | |
 | 0225 | Implement Stack using Queues | Q4를 반대 방향으로 | | |
 | 0155 | Min Stack | 스택에 정보 하나 더 얹기 | | |
@@ -29,7 +30,11 @@ Week4 과제랑 같은 근육이라, 한쪽을 풀면 다른 쪽이 같이 쉬�
 | 0141 | Linked List Cycle | 검산기의 순환 감지와 같은 아이디어 | | |
 | 0234 | Palindrome Linked List | 스택 + 리스트를 같이 | | |
 
-여덟 줄이면 언어 두 번씩 해서 열여섯 번이니까, 하루 하나 기준으로 2주 반 정도예요.
+0100 은 목록에 없던 문제예요. 09-15 오전에 Week4 Binary_Tree 를 하던 흐름 그대로 풀어버려서,
+순서를 어긴 셈이지만 푼 건 푼 거니까 줄을 만들어 끼워넣었어요. 위치는 0020 바로 위요 —
+그래야 "맨 위에서부터 빈 칸 있는 줄" 규칙이 다음 문제로 0100 파이썬을 가리킵니다 ( ˶ˆ ᗜ ˆ˵ )
+
+아홉 줄이면 언어 두 번씩 해서 열여덟 번이니까, 하루 하나 기준으로 3주 좀 안 되게예요.
 다 내려가면 그때 다음 묶음을 붙이면 돼요. 미리 스무 개 적어두면 어차피 안 봐요 (¬‿¬ )
 
 ## 다음 묶음 후보
