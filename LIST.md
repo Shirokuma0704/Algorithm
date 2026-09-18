@@ -23,7 +23,7 @@
 | 번호 | 문제 | 지금 하는 일로 이어지는 것 | py | c |
 | --- | --- | --- | --- | --- |
 | 0206 | Reverse Linked List | 노드를 건드리는 동안 다음 주소를 잃지 않기. 포인터를 끊기 **전에** 옮겨두는 순서 감각 그 자체 | 09-14 | 09-14 |
-| 0100 | Same Tree | 포인터 둘을 나란히 따라 내려가며 매 단계 None 을 확인. null deref 의 반대 습관 | | 09-15 |
+| 0100 | Same Tree | 포인터 둘을 나란히 따라 내려가며 매 단계 None 을 확인. null deref 의 반대 습관 | 09-18 | 09-15 |
 | 0020 | Valid Parentheses | 열고 닫는 짝을 스택으로 맞추기. malloc 과 free 의 짝, double free 와 누수가 같은 모양 | 09-16 | |
 | 0232 | Implement Queue using Stacks | 버퍼 사이로 데이터를 옮긴 뒤 원본을 어떤 상태로 두는가. 옮겨간 다음의 원본이 문제 | | |
 | 0225 | Implement Stack using Queues | 0232 를 반대로. 같은 데이터를 두 자료구조가 동시에 들고 있을 때 누가 주인인가 | | |
