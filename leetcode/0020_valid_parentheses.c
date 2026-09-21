@@ -63,6 +63,7 @@ bool isValid(char *s)
 {
     if (strlen(s) == 0) return false;
     char stack[strlen(s)+1];
+    memset(&stack, 0, sizeof(char)*(strlen(s)+1));
     int last_index = 0;
 
     while (*s != '\0')
@@ -126,6 +127,8 @@ static Case CASES[] = {
     { "([)]",            0 },
     { "",            0 },
      { "{((",            0 },
+{ ")",            0 },
+
 };
 
 int main(void)
