@@ -20,10 +20,17 @@ if (NOT MSVC)
     add_compile_options(-Wall -Wextra)
 endif ()
 
-# 플랫폼 폴더(leetcode/, 나중에 boj/, programmers/) 아래의 .c 를 전부 모아요.
-# 나중에 폴더가 늘어나도 이 줄은 안 건드려도 됩니다.
-file(GLOB_RECURSE SOLUTION_SOURCES CONFIGURE_DEPENDS
-        "${CMAKE_CURRENT_SOURCE_DIR}/*/*.c")
+# 플랫폼 폴더(leetcode/, 나중에 boj/, programmers/) 바로 아래의 .c 를 모아요.
+# 폴더가 새로 생기면 여기에 한 줄 추가해 주세요.
+#
+# 원래는 GLOB_RECURSE 로 저장소 전체를 뒤졌는데, 그러면 .venv 랑 .git 까지
+# 매 빌드마다 훑어요. WSL 에서 /mnt/c 를 건너가 읽는 게 비싸서 그 검사만
+# 9~11초가 걸렸어요(2026-09-23 측정). leetcode/ 만 보면 0.3초 안쪽이에요.
+# 덤으로 cmake-build-debug/ 안의 CMakeCCompilerId.c 가 타깃으로 잘못 잡히던 것도 없어져요.
+file(GLOB SOLUTION_SOURCES CONFIGURE_DEPENDS
+        "${CMAKE_CURRENT_SOURCE_DIR}/leetcode/*.c"
+        "${CMAKE_CURRENT_SOURCE_DIR}/boj/*.c"
+        "${CMAKE_CURRENT_SOURCE_DIR}/programmers/*.c")
 
 foreach (SOURCE_FILE ${SOLUTION_SOURCES})
     # leetcode/0206_reverse_linked_list.c  ->  타깃 이름 lc0206_reverse_linked_list
