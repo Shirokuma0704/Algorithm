@@ -119,6 +119,7 @@ int myQueuePop(MyQueue *obj)
             obj->output.idx++;
         }
         obj->input.idx = 0;
+        obj->output.idx = 0;
     }
     int pop_output = obj->output.val[obj->output.idx];
     obj->output.idx++;
@@ -148,6 +149,7 @@ int myQueuePeek(MyQueue *obj)
             obj->output.idx++;
         }
         obj->input.idx = 0;
+        obj->output.idx =0;
     }
     return obj->output.val[obj->output.idx];
 }
