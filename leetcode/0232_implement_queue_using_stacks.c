@@ -104,25 +104,24 @@ void myQueuePush(MyQueue *obj, int x)
 int myQueuePop(MyQueue *obj)
 {
 
-    int idx = obj->output.idx;
 
     if (obj->output.val[obj->output.idx] == 0)
     {
-        if ( obj->input.val[idx] == 0) return 0;
-
+        if ( obj->input.val[obj->input.idx] == 0) return 0;
         obj->output.idx = 0;
-        while (obj->input.val[idx] != 0)
+        while (obj->input.val[obj->input.idx] != 0)
         {
-            obj->output.val[obj->output.idx] = obj->input.val[idx];
-            obj->input.val[idx] = 0;
-            idx++;
+            obj->output.val[obj->output.idx] = obj->input.val[obj->input.idx];
+            obj->input.val[obj->input.idx] = 0;
+            obj->input.idx--;
             obj->output.idx++;
         }
         obj->input.idx = 0;
-        obj->output.idx = 0;
     }
+
     int pop_output = obj->output.val[obj->output.idx];
-    obj->output.idx++;
+    obj->output.val[obj->output.idx] = 0;
+    obj->output.idx--;
 
     return pop_output;
 }
@@ -135,21 +134,18 @@ int myQueuePop(MyQueue *obj)
  */
 int myQueuePeek(MyQueue *obj)
 {
-    int idx = obj->output.idx;
-
     if (obj->output.val[obj->output.idx] == 0)
     {
-        if ( obj->input.val[idx] == 0) return 0;
+        if ( obj->input.val[obj->input.idx] == 0) return 0;
         obj->output.idx = 0;
-        while (obj->input.val[idx] != 0)
+        while (obj->input.val[obj->input.idx] != 0)
         {
-            obj->output.val[obj->output.idx] = obj->input.val[idx];
-            obj->input.val[idx] = 0;
-            idx++;
+            obj->output.val[obj->output.idx] = obj->input.val[obj->input.idx];
+            obj->input.val[obj->input.idx] = 0;
+            obj->input.idx--;
             obj->output.idx++;
         }
         obj->input.idx = 0;
-        obj->output.idx =0;
     }
     return obj->output.val[obj->output.idx];
 }
