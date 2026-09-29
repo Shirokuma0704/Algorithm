@@ -105,22 +105,20 @@ int myQueuePop(MyQueue *obj)
 {
 
 
-    if (obj->output.val[obj->output.idx] == 0)
+    if (obj->output.idx == 0)
     {
-        if ( obj->input.val[obj->input.idx] == 0) return 0;
-        obj->output.idx = 0;
-        while (obj->input.val[obj->input.idx] != 0)
+        if ( obj->input.idx == 0) return 0;
+        while (obj->input.idx != 0)
         {
-            obj->output.val[obj->output.idx] = obj->input.val[obj->input.idx];
-            obj->input.val[obj->input.idx] = 0;
+            obj->output.val[obj->output.idx] = obj->input.val[obj->input.idx-1];
+            obj->input.val[obj->input.idx-1] = 0;
             obj->input.idx--;
             obj->output.idx++;
         }
-        obj->input.idx = 0;
     }
 
-    int pop_output = obj->output.val[obj->output.idx];
-    obj->output.val[obj->output.idx] = 0;
+    int pop_output = obj->output.val[obj->output.idx-1];
+    obj->output.val[obj->output.idx-1] = 0;
     obj->output.idx--;
 
     return pop_output;
@@ -134,27 +132,31 @@ int myQueuePop(MyQueue *obj)
  */
 int myQueuePeek(MyQueue *obj)
 {
-    if (obj->output.val[obj->output.idx] == 0)
+    if (obj->output.idx == 0)
     {
-        if ( obj->input.val[obj->input.idx] == 0) return 0;
-        obj->output.idx = 0;
-        while (obj->input.val[obj->input.idx] != 0)
+        if ( obj->input.idx == 0) return 0;
+        while (obj->input.idx != 0)
         {
-            obj->output.val[obj->output.idx] = obj->input.val[obj->input.idx];
-            obj->input.val[obj->input.idx] = 0;
-            obj->input.idx--;
+            obj->output.val[obj->output.idx] = obj->input.val[obj->input.idx-1];
+            obj->input.val[obj->input.idx-1] = 0;
             obj->output.idx++;
+            obj->input.idx--;
         }
-        obj->input.idx = 0;
     }
-    return obj->output.val[obj->output.idx];
+    //int pop_output = obj->output.val[obj->output.idx-1];
+    //obj->output.val[obj->output.idx-1] = 0;
+    //obj->output.idx--;
+
+    //return pop_output;
+
+    return obj->output.val[obj->output.idx-1];
 }
 
 
 /* 비어 있으면 true. */
 bool myQueueEmpty(MyQueue *obj)
 {
-    if (obj->output.val[obj->output.idx] == 0 && obj->input.val[obj->input.idx] == 0) return true;
+    if (obj->output.idx == 0 && obj->input.idx == 0) return true;
     return false;
 }
 
@@ -210,11 +212,11 @@ static Step CASE3[] = { U(1), U(2), O(1), O(2), E(1), END };
 
 
 /* 주석을 풀고 채워주세요. 줄을 더 만드셔도 돼요. */
-/* static Step CASE2[] = { END }; */
+ static Step CASE4[] = { U(1),O(1),U(2),O(2),END };
 /* static Step CASE3[] = { END }; */
 
-static Step *CASES[] = { CASE1,  CASE2, CASE3  };
-static const char *NAMES[] = { "예제", "케이스2", "케이스3"  };
+static Step *CASES[] = { CASE1,  CASE2, CASE3, CASE4  };
+static const char *NAMES[] = { "예제", "케이스2", "케이스3","케이스4"  };
 
 
 static int run_case(const char *name, Step *steps)
@@ -226,6 +228,7 @@ static int run_case(const char *name, Step *steps)
         printf("FAIL   %s: myQueueCreate 가 NULL 을 돌려줬어요\n", name);
         return 0;
     }
+
 
     for (int i = 0; steps[i].op != 0; i++) {
         Step *s = &steps[i];
@@ -240,6 +243,7 @@ static int run_case(const char *name, Step *steps)
          * empty() 결과도 그대로여야 해요. 무엇을 떠두고 무엇과 비교할지가 비어 있어요.
          */
 
+
         switch (s->op) {
         case 'U':
             myQueuePush(q, s->arg);
@@ -250,6 +254,20 @@ static int run_case(const char *name, Step *steps)
         case 'E': got = myQueueEmpty(q) ? 1 : 0; break;
         }
 
+        int empty1 = myQueueEmpty(q), peak1 = myQueuePeek(q);
+        int empty2 = myQueueEmpty(q), peak2 = myQueuePeek(q);
+        if (peak1 != peak2 || empty1 != empty2)
+        {
+            printf("Peek Error \n");
+            ok = 0;
+            myQueueFree(q);
+
+            printf("[%s] %s\n\n", ok ? "PASS" : "FAIL", name);
+            return ok;
+
+        }
+
+
         if (got == s->expect) {
             printf("       %c() -> %d\n", s->op == 'O' ? 'p' : (s->op == 'K' ? 'k' : 'e'), got);
         } else {
@@ -258,6 +276,7 @@ static int run_case(const char *name, Step *steps)
             ok = 0;
         }
     }
+
 
     /* 여기서 놓아주지 않으면 valgrind 가 누수로 잡아요.
      * 0020 에서 쓴 그 도구입니다 — 이번엔 "안 놓아준 것" 을 봅니다.
